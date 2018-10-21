@@ -1,0 +1,71 @@
+<!-- Created By : Sangwin Gawande (http://sangw.in) -->
+
+<div class="w3-container" *ngIf="studentAddForm">
+	<form class="w3-container" [formGroup]="studentAddForm" (ngSubmit)="doRegister()">
+	<div class="w3-panel w3-round-small w3-teal">
+		<h3><span *ngIf="index == undefined">Student Registration</span><span *ngIf="index != undefined">Student Update</span> <a routerLink="/" class="w3-button w3-green custom-button"><i class="w3-medium fa fa-chevron-left"></i> Back</a></h3>
+	</div>
+
+		<label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-user"></i><b>First Name</b></label>
+		<input class="w3-input w3-border" type="text" formControlName="first_name">
+		<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.first_name.invalid && (studentAddForm.controls.first_name.dirty || studentAddForm.controls.first_name.touched)">Please enter 3 to 50 characters</div>
+
+		<label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-user"></i><b>Last Name</b></label>
+		<input class="w3-input w3-border" type="text" formControlName="last_name">
+		<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.last_name.invalid && (studentAddForm.controls.last_name.dirty || studentAddForm.controls.last_name.touched)">Please enter  3 to 50 characters </div>
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-birthday-cake"></i><b>Date of Birth</b></label>
+    <input class="w3-input w3-border" type="date" formControlName="dateOfBirth">
+    <!--<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.dateOfBirth.invalid && (studentAddForm.controls.email.dirty || studentAddForm.controls.email.touched)">Please enter valid email address</div>-->
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-birthday-cake"></i><b>Parent</b></label>
+    <div class="w3-row">
+      <input class="w3-input w3-border w3-quarter" type="number" formControlName="parentId">
+      <input class="w3-input w3-border w3-threequarter" type="text" formControlName="parentName">
+    </div>
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-graduation-cap"></i><b>School</b></label>
+    <div class="w3-row">
+      <input class="w3-input w3-border w3-quarter" type="number" formControlName="schoolId">
+      <input class="w3-input w3-border w3-threequarter" type="number" formControlName="schoolName">
+    </div>
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-line-chart"></i><b>Grade</b></label>
+    <select class="w3-select w3-border">
+      <option value="1">Grade 1</option>
+      <option value="2">Grade 2</option>
+      <option value="3">Grade 3</option>
+      <option value="4">Grade 4</option>
+      <option value="5">Grade 5</option>
+      <option value="6">Grade 6</option>
+      <option value="7">Grade 7</option>
+      <option value="8">Grade 8</option>
+      <option value="9">Grade 9</option>
+      <option value="10">Grade 10</option>
+      <option value="11">Grade 11</option>
+      <option value="12">Grade 12</option>
+      <option value="13">Grade 13</option>
+      <option value="13">Grade 13</option>
+    </select>
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-language"></i><b>Medium</b></label>
+    <select class="w3-select w3-border">
+      <option value="1">Sinhala</option>
+      <option value="2">English</option>
+      <option value="3">Tamil</option>
+    </select>
+
+    <label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-envelope-o"></i><b>Email Address</b></label>
+		<input class="w3-input w3-border" type="text" formControlName="email">
+		<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.email.invalid && (studentAddForm.controls.email.dirty || studentAddForm.controls.email.touched)">Please enter valid email address</div>
+
+		<label class="w3-text-blue"><i class="w3-medium custom-icon fa fa-phone"></i><b>Phone</b></label>
+		<input class="w3-input w3-border" type="number" formControlName="phone">
+		<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.phone.invalid && (studentAddForm.controls.phone.dirty || studentAddForm.controls.phone.touched)">Please enter valid phone number</div>
+		<br>
+		<button class="w3-btn w3-blue" type="submit" [disabled]="!studentAddForm.valid"><span *ngIf="index == undefined">Register</span><span *ngIf="index != undefined">Update</span> <i class="w3-medium fa fa-check"></i> </button>
+
+	</form>
+</div>
+
+<!-- Created By : Sangwin Gawande (http://sangw.in) -->
