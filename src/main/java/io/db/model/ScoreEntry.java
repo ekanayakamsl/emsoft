@@ -1,4 +1,4 @@
-package io.swagger.db.model;
+package io.db.model;
 
 import javax.persistence.*;
 import java.util.Arrays;

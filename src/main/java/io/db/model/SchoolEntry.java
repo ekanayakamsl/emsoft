@@ -1,4 +1,4 @@
-package io.swagger.db.model;
+package io.db.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,7 +25,7 @@ public class SchoolEntry {
     }
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SCHOOL_ID", nullable = false)
     public Integer getSchoolId() {
         return schoolId;
@@ -94,6 +94,6 @@ public class SchoolEntry {
     }
 
     public List<String> _getTelephoneNoList() {
-        return Arrays.asList(this.telephoneNo.split("|"));
+        return Arrays.asList(getTelephoneNo().split(","));
     }
 }

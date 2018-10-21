@@ -1,13 +1,13 @@
-package io.swagger.db.model;
+package io.db.model;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "class_has_student", schema = "tution", catalog = "")
-public class ClassHasStudentEntry {
+@Table(name = "parent_has_student", schema = "tution", catalog = "")
+public class ParentHasStudentEntry {
     private Integer id;
-    private Integer classClassId;
+    private Integer parentParentId;
     private Integer studentStudentId;
 
     @Id
@@ -21,13 +21,13 @@ public class ClassHasStudentEntry {
     }
 
     @Basic
-    @Column(name = "CLASS_CLASS_ID", nullable = true)
-    public Integer getClassClassId() {
-        return classClassId;
+    @Column(name = "PARENT_PARENT_ID", nullable = true)
+    public Integer getParentParentId() {
+        return parentParentId;
     }
 
-    public void setClassClassId(Integer classClassId) {
-        this.classClassId = classClassId;
+    public void setParentParentId(Integer parentParentId) {
+        this.parentParentId = parentParentId;
     }
 
     @Basic
@@ -44,15 +44,15 @@ public class ClassHasStudentEntry {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClassHasStudentEntry that = (ClassHasStudentEntry) o;
+        ParentHasStudentEntry that = (ParentHasStudentEntry) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(classClassId, that.classClassId) &&
+                Objects.equals(parentParentId, that.parentParentId) &&
                 Objects.equals(studentStudentId, that.studentStudentId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, classClassId, studentStudentId);
+        return Objects.hash(id, parentParentId, studentStudentId);
     }
 }

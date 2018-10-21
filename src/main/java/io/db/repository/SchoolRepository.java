@@ -1,6 +1,6 @@
-package io.swagger.db.repository;
+package io.db.repository;
 
-import io.swagger.db.model.SchoolEntry;
+import io.db.model.SchoolEntry;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SchoolRepository extends JpaRepository<SchoolEntry, Integer> {

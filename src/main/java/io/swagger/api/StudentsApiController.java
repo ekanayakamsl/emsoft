@@ -1,7 +1,7 @@
 package io.swagger.api;
 
-import io.swagger.db.model.StudentEntry;
-import io.swagger.db.repository.StudentRepository;
+import io.db.model.StudentEntry;
+import io.db.repository.StudentRepository;
 import io.swagger.mapper.StudentMaper;
 import io.swagger.model.Student;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,10 +42,12 @@ public class StudentsApiController implements StudentsApi {
         String accept = request.getHeader("Accept");
         if (accept != null) {
             try {
-                StudentEntry studentEntry = StudentMaper.studentEntryToStudent(student);
+                StudentEntry studentEntry = StudentMaper.studentToStudentEntry(student, studentRepository);
+                studentEntry = studentRepository.save(studentEntry);
+                studentEntry.setRegId("G"+studentEntry.getGrade()+"R"+studentEntry.getStudentId());
                 studentRepository.save(studentEntry);
-                return new ResponseEntity<Student>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"parent\" : [ {    \"address\" : \"address\",    \"name\" : \"name\",    \"prid\" : \"prid\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  }, {    \"address\" : \"address\",    \"name\" : \"name\",    \"prid\" : \"prid\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  } ],  \"school\" : {    \"schid\" : \"schid\",    \"address\" : \"address\",    \"name\" : \"name\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  },  \"grade\" : 6,  \"regid\" : \"regid\",  \"dateOfBirth\" : \"2000-01-23\",  \"medium\" : \"SINHALA\",  \"age\" : 0}", Student.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
+                return new ResponseEntity<Student>(StudentMaper.studentEntryToStudent(studentEntry), HttpStatus.NOT_IMPLEMENTED);
+            } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Student>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -55,9 +57,8 @@ public class StudentsApiController implements StudentsApi {
 
     public ResponseEntity<Student> studentsRegidGet(@ApiParam(value = "The student's registration id",required=true) @PathVariable("regid") String regid) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("*/*")) {
+        if (accept != null && accept.contains("application/json")) {
             try {
-                studentRepository.findAll();
                 return new ResponseEntity<Student>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"parent\" : [ {    \"address\" : \"address\",    \"name\" : \"name\",    \"prid\" : \"prid\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  }, {    \"address\" : \"address\",    \"name\" : \"name\",    \"prid\" : \"prid\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  } ],  \"school\" : {    \"schid\" : \"schid\",    \"address\" : \"address\",    \"name\" : \"name\",    \"phoneNo\" : [ \"phoneNo\", \"phoneNo\" ]  },  \"grade\" : 6,  \"regid\" : \"regid\",  \"dateOfBirth\" : \"2000-01-23\",  \"medium\" : \"SINHALA\",  \"age\" : 0}", Student.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);

@@ -4,8 +4,11 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.db.model.StudentEntry;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.model.Parent;
+import io.swagger.model.School;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.LocalDate;
@@ -20,6 +23,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-08T17:29:46.360Z")
 
 public class Student   {
+  private static final String SINHALA = "SINHALA";
   @JsonProperty("regid")
   private String regid = null;
 
@@ -38,7 +42,27 @@ public class Student   {
   @JsonProperty("grade")
   private Integer grade = null;
 
-  /**
+  public Student() {
+  }
+
+  public Student(String regid, String firstName, String lastName, LocalDate dateOfBirth, Integer age, Integer grade, MediumEnum medium, School school, List<Parent> parent) {
+    this.regid = regid;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dateOfBirth = dateOfBirth;
+    this.age = age;
+    this.grade = grade;
+    this.medium = medium;
+    this.school = school;
+    this.parent = parent;
+  }
+
+  public Integer _getMedium() {
+    Integer medium = getMedium() != null ? MediumEnum.SINHALA == getMedium() ? 1 : 0 : 0;
+    return medium;
+  }
+
+    /**
    * Gets or Sets medium
    */
   public enum MediumEnum {
@@ -93,7 +117,7 @@ public class Student   {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-@Size(min=12,max=12)
+@Size(min=12,max=12) 
   public String getRegid() {
     return regid;
   }

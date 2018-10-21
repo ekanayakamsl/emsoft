@@ -2,9 +2,13 @@ package io.swagger.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -34,14 +38,17 @@ public class School   {
     return this;
   }
 
-    public School(String schid, String name, List<String> phoneNo, String address) {
-        this.schid = schid;
-        this.name = name;
-        this.phoneNo = phoneNo;
-        this.address = address;
-    }
+  public School() {
+  }
 
-    /**
+  public School(String schid, String name, List<String> phoneNo, String address) {
+    this.schid = schid;
+    this.name = name;
+    this.phoneNo = phoneNo;
+    this.address = address;
+  }
+
+  /**
    * Get schid
    * @return schid
   **/
@@ -146,6 +153,8 @@ public class School   {
     return Objects.hash(schid, name, phoneNo, address);
   }
 
+
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -170,12 +179,9 @@ public class School   {
     return o.toString().replace("\n", "\n    ");
   }
 
-    public String getPhoneNoString() {
-    String phoneNo = "";
-    for (String s: this.phoneNo) {
-      phoneNo = phoneNo + s + "|";
-    }
-    return phoneNo;
+  public String _getPhoneNoString() {
+    return getPhoneNo().stream().map(Object::toString)
+            .collect(Collectors.joining(","));
   }
 }
 

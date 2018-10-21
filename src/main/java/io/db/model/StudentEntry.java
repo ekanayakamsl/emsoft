@@ -1,4 +1,6 @@
-package io.swagger.db.model;
+package io.db.model;
+
+import io.swagger.model.Student;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -25,7 +27,6 @@ public class StudentEntry {
     public Integer getStudentId() {
         return studentId;
     }
-
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
@@ -142,4 +143,15 @@ public class StudentEntry {
 
         return Objects.hash(studentId, regId, firstName, lastName, dateOfBirth, age, grade, medium, lastModifiedTime, schoolSchoolId);
     }
+
+    public Student.MediumEnum _getMedium() {
+        if (getMedium() == 1) {
+            return Student.MediumEnum.SINHALA;
+        } else if (getMedium() == 2) {
+            return Student.MediumEnum.ENGLISH;
+        } else {
+            return Student.MediumEnum.TAMIL;
+        }
+    }
+
 }
